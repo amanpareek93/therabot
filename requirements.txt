@@ -1,0 +1,12 @@
+langchain
+langgraph
+openai
+transformers
+torch
+tqdm
+streamlit
+gradio
+faiss-cpu       # Optional: for memory support
+python-dotenv   # Optional: for managing API keys
+flask
+streamlit
