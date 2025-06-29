@@ -4,11 +4,17 @@ from langgraph.graph.message import add_messages
 from transformers import pipeline
 from openai import OpenAI
 from dotenv import load_dotenv
+
+import streamlit as st
+from openai import OpenAI
+
+
 import os
 
 # --- CONFIG ---
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+#client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI(api_key = st.secrets["OPENAI_API_KEY"])
 sentiment_analyzer = pipeline("sentiment-analysis")
 
 # --- LLM Call ---
@@ -105,7 +111,7 @@ CORS(app)
 def chat():
     data = request.json
     user_input = data.get("user_input", "")
-    user_name = data.get("user_name", "Friend")
+    user_name = data.get("user_name", "")
     history = data.get("history", [])
 
     state = {
