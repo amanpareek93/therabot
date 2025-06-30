@@ -26,7 +26,7 @@ if submitted and user_input.strip():
     try:
         # Change the port if your Flask server runs on a different one
         
-        url = "https://therabot-hft29jtzx5zypt5rbcgnyz.streamlit.app/"
+        url = "https://therabot-hft29jtzx5zypt5rbcgnyz.streamlit.app/chat"
         # "http://127.0.0.1:2300/chat
         response = requests.post(url, json=payload)
         if response.status_code == 200:
