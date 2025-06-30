@@ -11,3 +11,4 @@ python-dotenv   # Optional: for managing API keys
 flask
 streamlit
 flask_cors
+gunicorn

@@ -13,8 +13,8 @@ import os
 
 # --- CONFIG ---
 load_dotenv()
-#client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-client = OpenAI(api_key = st.secrets["OPENAI_API_KEY"])
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+#client = OpenAI(api_key = st.secrets["OPENAI_API_KEY"])
 sentiment_analyzer = pipeline("sentiment-analysis")
 
 # --- LLM Call ---
