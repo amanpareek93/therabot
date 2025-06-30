@@ -7,7 +7,7 @@ st.title("🧠 TheraBot - Mental Health Companion")
 
 # Input form
 with st.form("chat_form"):
-    user_name = st.text_input("Your Name", value="Friend")
+    user_name = st.text_input("Your Name", value="")
     user_input = st.text_area("How are you feeling today?")
     submitted = st.form_submit_button("Send")
 
