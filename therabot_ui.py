@@ -25,7 +25,10 @@ if submitted and user_input.strip():
 
     try:
         # Change the port if your Flask server runs on a different one
-        response = requests.post("http://127.0.0.1:2300/chat", json=payload)
+        
+        url = "https://therabot-hft29jtzx5zypt5rbcgnyz.streamlit.app/"
+        # "http://127.0.0.1:2300/chat
+        response = requests.post(url, json=payload)
         if response.status_code == 200:
             data = response.json()
             st.session_state["history"] = data["history"]
