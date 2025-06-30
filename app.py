@@ -1,12 +1,16 @@
 from flask import Flask, request, jsonify
 from langgraph.graph import StateGraph, END
 from langgraph.graph.message import add_messages
-from transformers import pipeline
+#from transformers import pipeline
 from openai import OpenAI
 from dotenv import load_dotenv
 
 import streamlit as st
 from openai import OpenAI
+
+from textblob import TextBlob
+
+
 
 
 import os
@@ -15,7 +19,7 @@ import os
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 #client = OpenAI(api_key = st.secrets["OPENAI_API_KEY"])
-sentiment_analyzer = pipeline("sentiment-analysis")
+#sentiment_analyzer = pipeline("sentiment-analysis")
 
 # --- LLM Call ---
 def call_openai_llm(prompt):
@@ -31,9 +35,12 @@ def call_openai_llm(prompt):
 # --- Nodes ---
 def analyze_sentiment(state):
     user_input = state["user_input"]
-    sentiment = sentiment_analyzer(user_input)[0]
-    state["sentiment"] = sentiment["label"]
+    analysis = TextBlob(user_input)
+    polarity = analysis.sentiment.polarity
+    sentiment = "POSITIVE" if polarity > 0 else "NEGATIVE" if polarity < 0 else "NEUTRAL"
+    state["sentiment"] = sentiment
     return state
+
 
 def manage_state(state):
     history = state.get("history", [])
@@ -136,4 +143,5 @@ def health():
 
 
 if __name__ == "__main__":
-    app.run(port=2300)
+    port = int(os.environ.get("PORT", 10000))  # fallback for local
+    app.run(host="0.0.0.0", port=port)
